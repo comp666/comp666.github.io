@@ -1,26 +1,57 @@
+
+  $(".loader_inner").delay(6500).fadeOut();
+  $(".loader").delay(6500).fadeOut("slow");
+
+
+(function($){
+
+ $.fn.tabbed_interface = function(options) {
+
+  var defaults = {
+   fade_duration: 500,
+   
+   
+  };
+
+  var options = $.extend(defaults, options);
+
+  return this.each(function(el) {
+
+   el = this;
+
+   $(el).children('ul').children('li').children('a').click(function(){
+
+    $(el).children('div').fadeOut(options.fade_duration/2).
+     filter(this.hash).fadeIn(options.fade_duration/2);
+
+    return false;
+
+   });
+						
+   $('.box-content>a').bind("click touch", function(e)
+   
+   { e.preventDefault(); 
+	  
+				$(el).children('div').css('position','absolute').fadeOut(options.fade_duration/2);
+				
+       return false;
+		  
+	  });
+   
+  
+   $(el).children('div').css('position','absolute').hide();
+
+  
+  });
+
+ };
+})(jQuery);
+
 $(document).ready(function(){
-	$('li').hover(function(){
-		$(this).find('ul>li').stop(true,true).fadeToggle(400);
-		});
-	});
-	
-	
-	/* Visit my website @ www.miukimiu.com *
-I was searching for a solution to show my portfolio. I just wanted to show small thumbs of my work dnd some info about it.
-Be free to fork it and improve it.
-*/
-
-var more = $('.item-buttons .more');
-var cancel = $('.cancel');
-
-more.click(function () {
-  //alert('ok');
-  $(this).parent().parent().find('.info').show();
-  //$('.info').show();
-});
-
-cancel.click(function () {
-  //alert('ok');
-  $(this).parent().hide();
-});
-
+     $('#tabbed-interface').tabbed_interface({
+		
+								
+								fade_duration:1100
+								}); 
+     
+    });
